@@ -9,7 +9,8 @@ import LNPopupUI
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var musicPlayerEnv = MusicPlayerEnv()
+    
+    @EnvironmentObject var musicPlayerEnv: MusicPlayerEnv
 
     var body: some View {
         VStack {
@@ -25,20 +26,25 @@ struct ContentView: View {
                     .font(.largeTitle)
             })
         }
-        .popup(isBarPresented: $musicPlayerEnv.isBarPresented, isPopupOpen: $musicPlayerEnv.isPopupOpen) {
+        .popup(isBarPresented: $musicPlayerEnv.isBarPresented,
+               isPopupOpen: $musicPlayerEnv.isPopupOpen) {
+            
             // player view
             PlayerView()
-                .environmentObject(musicPlayerEnv)
                 .popupTitle(musicPlayerEnv.title, subtitle: musicPlayerEnv.subTitle)
-        }
-        .popupBarStyle(.floating)
-        .popupInteractionStyle(.customizedSnap(percent: 0.2))
-        .popupCloseButtonStyle(.none)
-        .popupBarProgressViewStyle(.none)
+            
+        } .popupBarStyle(.floating)
+            .popupInteractionStyle(.customizedSnap(percent: 0.2))
+            .popupCloseButtonStyle(.none)
+            .popupBarProgressViewStyle(.none)
+       
     }
 }
 
 struct PlayerView: View {
+    
+    @EnvironmentObject var musicPlayerEnv: MusicPlayerEnv
+    
     var body: some View {
         VStack {
             Spacer()
@@ -46,6 +52,14 @@ struct PlayerView: View {
             Text("Music Player")
                 .font(.largeTitle)
 
+            Button(action: {
+                musicPlayerEnv.isPopupOpen = false
+            }, label: {
+                Text("Close")
+                    .background(.green)
+                    .font(.largeTitle)
+            })
+            
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
