@@ -9,21 +9,12 @@ import LNPopupUI
 import SwiftUI
 
 struct ContentView: View {
+
     @StateObject var musicPlayerEnv = MusicPlayerEnv()
 
     var body: some View {
         VStack {
-            Text("Timer: \(musicPlayerEnv.progress)")
-                .font(.largeTitle)
-                .padding(20)
-
-            Button(action: {
-                musicPlayerEnv.startOrPauseTimer()
-            }, label: {
-                Text(musicPlayerEnv.isPlaying ? "pause" : "play")
-                    .background(.red)
-                    .font(.largeTitle)
-            })
+            Text("root View").font(.largeTitle)
         }
         .popup(isBarPresented: $musicPlayerEnv.isBarPresented, isPopupOpen: $musicPlayerEnv.isPopupOpen) {
             // player view
@@ -39,6 +30,8 @@ struct ContentView: View {
 }
 
 struct PlayerView: View {
+    @StateObject var musicPlayerTimerEnv = MusicPlayerTimerEnv()
+    
     var body: some View {
         VStack {
             Spacer()
@@ -46,6 +39,18 @@ struct PlayerView: View {
             Text("Music Player")
                 .font(.largeTitle)
 
+            Text("Timer: \(musicPlayerTimerEnv.progress)")
+                .font(.largeTitle)
+                .padding(20)
+
+            Button(action: {
+                musicPlayerTimerEnv.startOrPauseTimer()
+            }, label: {
+                Text(musicPlayerTimerEnv.isPlaying ? "pause" : "play")
+                    .background(.red)
+                    .font(.largeTitle)
+            })
+            
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

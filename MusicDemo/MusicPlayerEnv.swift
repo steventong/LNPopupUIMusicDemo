@@ -12,10 +12,16 @@ import SwiftUI
 class MusicPlayerEnv: ObservableObject {
     @Published var isBarPresented = true
     @Published var isPopupOpen = false
-    @Published var progress: Double = 0
 
     @Published var title = "Title"
     @Published var subTitle = "SubTitle"
+
+   
+}
+
+
+class MusicPlayerTimerEnv: ObservableObject {
+    @Published var progress: Double = 0
 
     @Published var isPlaying = false
     @Published var timerCancellable: Cancellable?
