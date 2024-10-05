@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var musicPlayerEnv: MusicPlayerEnv
+    @EnvironmentObject var musicPlayerTimerEnv: MusicPlayerTimerEnv
 
     var body: some View {
         print("the root view is being redrawn")
@@ -23,7 +24,7 @@ struct ContentView: View {
                isPopupOpen: $musicPlayerEnv.isPopupOpen) {
             // player view
             PlayerView()
-                .popupTitle(musicPlayerEnv.title, subtitle: musicPlayerEnv.subTitle)
+                .popupTitle("Timer: \(musicPlayerTimerEnv.progress)", subtitle: musicPlayerEnv.subTitle)
         }
         .popupBarStyle(.floating)
         .popupInteractionStyle(.customizedSnap(percent: 0.2))

@@ -601,7 +601,7 @@
 			repositoryURL = "https://github.com/LeoNatan/LNPopupUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.6;
+				minimumVersion = 1.8.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
