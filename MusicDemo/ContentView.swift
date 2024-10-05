@@ -13,14 +13,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-            
             Text("Timer: \(musicPlayerEnv.progress)")
                 .font(.largeTitle)
-            
+                .padding(20)
+
             Button(action: {
                 musicPlayerEnv.startOrPauseTimer()
             }, label: {
@@ -29,7 +25,6 @@ struct ContentView: View {
                     .font(.largeTitle)
             })
         }
-        .environmentObject(musicPlayerEnv)
         .popup(isBarPresented: $musicPlayerEnv.isBarPresented, isPopupOpen: $musicPlayerEnv.isPopupOpen) {
             // player view
             PlayerView()
@@ -44,26 +39,17 @@ struct ContentView: View {
 }
 
 struct PlayerView: View {
-    @State var timer: Double = 0.0
-//    @EnvironmentObject var musicPlayerEnv: MusicPlayerEnv
-
     var body: some View {
         VStack {
             Spacer()
 
-//            Text("Timer: \(musicPlayerEnv.progress)")
-
-//            Button(action: {
-//                musicPlayerEnv.startOrPauseTimer()
-//            }, label: {
-//                Text(musicPlayerEnv.isPlaying ? "pause" : "play")
-//                    .background(.red)
-//            })
+            Text("Music Player")
+                .font(.largeTitle)
 
             Spacer()
-
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.blue)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.blue)
     }
 }
 
